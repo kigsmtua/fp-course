@@ -107,19 +107,19 @@ sum ::
   List Int
   -> Int
 sum =
-  error "todo: Course.List#sum"
+  foldLeft (+) [] 
 
 -- | Return the length of the list.
 --
 -- >>> length (1 :. 2 :. 3 :. Nil)
 -- 3
---
+-- This is what happens when such values come here
 -- prop> \x -> sum (map (const 1) x) == length x
 length ::
   List a
   -> Int
-length =
-  error "todo: Course.List#length"
+length [] = 0
+length (x:xs) = 1 + length xs
 
 -- | Map the given function on each element of the list.
 --
@@ -129,12 +129,13 @@ length =
 -- prop> \x -> headOr x (map (+1) infinity) == 1
 --
 -- prop> \x -> map id x == x
+-- This is just some values that come here  as values
 map ::
   (a -> b)
   -> List a
   -> List b
-map =
-  error "todo: Course.List#map"
+map f [] = []
+map f (x:xs) = f x : map f xs
 
 -- | Return elements satisfying the given predicate.
 --
